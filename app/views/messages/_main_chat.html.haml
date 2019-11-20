@@ -1,0 +1,31 @@
+.chat-main
+  .chat-main__main-header
+    .chat-main__main-header__left-box
+      %h2.chat-main__main-header__left-box__current-group
+        group name
+      %ul.chat-main__main-header__left-box__member-list
+        Menber：
+        %li.chat-main__main-header__left-box__member-list__member
+          chikara
+    =link_to "Edit", "#", class: "chat-main__main-header__edit-btn"
+
+  .chat-main__messages
+    .chat-main__messages__message
+      .chat-main__messages__message__upper-info
+        .chat-main__messages__message__upper-info__talker
+          chikara
+        .chat-main__messages__message__upper-info__date
+          2019/11/18(Mon) 20:00:00
+      .chat-main__messages__message__text
+        good
+  
+  .chat-main__form
+    %form#new_message.chat-main__form__new_message{"accept-charset" => "UTF-8", :action => "#", :enctype => "multipart/form-data", :method => "post"}
+      %input{:name => "utf8", :type => "hidden", :value => "✓"}/
+      %input{:name => "authenticity_token", :type => "hidden", :value => "#"}/
+      .chat-main__form__new_message__input-box
+        %input#message_content.chat-main__form__new_message__input-box__text{:name => "message[content]", :placeholder => "type a message", :type => "text"}/
+        %label.chat-main__form__new_message__input-box__image{:for => "message_image"}
+          %i.fas.fa-image
+          %input#message_image.chat-main__form__new_message__input-box__image__file{:name => "message[image]", :type => "file"}/
+      %input.chat-main__form__new_message__submit-btn{"data-disable-with" => "Send", :name => "commit", :type => "submit", :value => "Send"}/
