@@ -1,20 +1,22 @@
 .chat-side
   .chat-side__side-header
     .chat-side__side-header__box
-      .chat-side__side-header__box__user-name
+      %h3.chat-side__side-header__box__user-name
         = current_user.name
       %ul.chat-side__side-header__box__menu
       %li.chat-side__side-header__box__menu__new-group
-        =link_to "#" do
+        = link_to new_group_path do
           %i.fas.fa-edit.fas-white
       %li.chat-side__side-header__box__menu__edit-user
         =link_to edit_user_path(current_user) do
           %i.fas.fa-cog.fas-white
 
   .chat-side__groups
-    .chat-side__groups__group
-      .chat-side__groups__group__group-name
-        sample
-      .chat-side__groups__group__group-message
-        Good bye world
+    - current_user.groups.each do |group|
+      .chat-side__groups__group
+        = link_to group_messages_path(group) do
+          .chat-side__groups__group__group-name
+            = group.name
+          .chat-side__groups__group__group-message
+            メッセージはまだありません。
 
