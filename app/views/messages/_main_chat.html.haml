@@ -18,14 +18,13 @@
           2019/11/18(Mon) 20:00:00
       .chat-main__messages__message__text
         good
-  
+
   .chat-main__form
-    %form#new_message.chat-main__form__new_message{"accept-charset" => "UTF-8", :action => "#", :enctype => "multipart/form-data", :method => "post"}
-      %input{:name => "utf8", :type => "hidden", :value => "✓"}/
-      %input{:name => "authenticity_token", :type => "hidden", :value => "#"}/
-      .chat-main__form__new_message__input-box
-        %input#message_content.chat-main__form__new_message__input-box__text{:name => "message[content]", :placeholder => "type a message", :type => "text"}/
-        %label.chat-main__form__new_message__input-box__image{:for => "message_image"}
-          %i.fas.fa-image
-          %input#message_image.chat-main__form__new_message__input-box__image__file{:name => "message[image]", :type => "file"}/
-      %input.chat-main__form__new_message__submit-btn{"data-disable-with" => "Send", :name => "commit", :type => "submit", :value => "Send"}/
+    = form_for [@group, @message] do |f|
+      .chat-main__form__new_message
+        .chat-main__form__new_message__input-box
+          = f.text_field :content, class: 'chat-main__form__new_message__input-box__text', placeholder: 'type a message'
+          = f.label :image, class: 'chat-main__form__new_message__input-box__image' do
+            = icon('fas', 'image', class: 'icon')
+            = f.file_field :image, class: 'chat-main__form__new_message__input-box__image__file'
+        = f.submit 'Send', class: 'chat-main__form__new_message__submit-btn'
