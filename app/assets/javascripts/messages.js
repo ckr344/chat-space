@@ -1,7 +1,7 @@
 $(function(){
   function buildPost(message){
-    if (message.image) {
       var content = message.content ? `${message.content }` : "";
+      var img = message.image ? `<img src= ${ message.image }>` : "";
       var html =  `<div class="chat-main__messages__message" data-id="${message.id}">
         <div class="chat-main__messages__message__upper-info">
           <div class="chat-main__messages__message__upper-info__talker">
@@ -14,31 +14,13 @@ $(function(){
         <div class="chat-main__messages__message__text">
           <p class="lower-message__content">
             <div>
-              ${content}
+            ${content}
             </div>
-            <img src= ${message.image}>
+            ${img}
           </p>
         </div>
       </div>`
       return html;
-    } else {
-      var html =  `<div class="chat-main__messages__message" data-id="${message.id}">
-        <div class="chat-main__messages__message__upper-info">
-          <div class="chat-main__messages__message__upper-info__talker">
-            ${message.user_name}
-          </div>
-          <div class="chat-main__messages__message__upper-info__date">
-            ${message.date}
-          </div>
-        </div>
-        <div class="chat-main__messages__message__text">
-          <p class="lower-message__content">
-            ${message.content}
-          </p>
-        </div>
-      </div>`
-      return html;
-    }
   }
 
   $('#new_message').on('submit', function(e){
@@ -56,8 +38,7 @@ $(function(){
     .done(function(message){
       var html = buildPost(message);
       $('.chat-main__messages').append(html)
-      $('#message_content').val('')
-      $('#message_image').val('')
+      $("#new_message")[0].reset();
       $('.chat-main__messages').animate({ scrollTop: $('.chat-main__messages')[0].scrollHeight});
     })
     .fail(function(){
