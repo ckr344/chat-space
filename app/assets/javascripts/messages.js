@@ -1,5 +1,5 @@
 $(function(){
-  function buildPost(message){
+  function buildHTML(message){
       var content = message.content ? `${message.content }` : "";
       var img = message.image ? `<img src= ${ message.image }>` : "";
       var html =  `<div class="chat-main__messages__message" data-id="${message.id}">
@@ -36,7 +36,7 @@ $(function(){
       contentType: false
     })
     .done(function(message){
-      var html = buildPost(message);
+      var html = buildHTML(message);
       $('.chat-main__messages').append(html)
       $("#new_message")[0].reset();
       $('.chat-main__messages').animate({ scrollTop: $('.chat-main__messages')[0].scrollHeight});
@@ -48,4 +48,29 @@ $(function(){
       $('.chat-main__form__new_message__submit-btn').prop('disabled', false);
     })
   })
+
+  var reloadMessages = function () {
+    if (window.location.href.match(/\/groups\/\d+\/messages/)){
+      var last_message_id = $('.chat-main__messages__message:last').data('message-id');
+
+      $.ajax({
+        url: "api/messages",
+        type: 'get',
+        dataType: 'json',
+        data: {last_id: last_message_id}
+      })
+      .done(function (messages) {
+        var insertHTML = '';
+        messages.forEach(function (message) {
+          insertHTML = buildHTML(message);
+          $('.chat-main__messages').append(insertHTML);
+        })
+        $('.chat-main__messages').animate({scrollTop: $('.chat-main__messages')[0].scrollHeight}, 'fast');
+      })
+      .fail(function () {
+        alert('自動更新に失敗しました');
+      });
+    }
+  };
+  setInterval(reloadMessages, 7000);
 })
