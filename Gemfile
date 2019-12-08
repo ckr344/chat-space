@@ -62,3 +62,7 @@ group :development, :test do
   gem 'pry-rails'
   gem 'jquery-rails'
 end
+
+group :production do
+  gem 'unicorn', '5.4.1'
+end
