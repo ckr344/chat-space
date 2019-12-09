@@ -57,7 +57,7 @@ $(function(){
         url: "api/messages",
         type: 'get',
         dataType: 'json',
-        data: {last_id: last_message_id}
+        data: {id: last_message_id}
       })
       .done(function (messages) {
         var insertHTML = '';
