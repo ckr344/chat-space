@@ -19,3 +19,5 @@
 # ChatSpaceは画像の投稿を行なう機能が備わっていますが、投稿された画像自体はソースコードには関係のないもの
 # あらかじめ画像が保管されるpublic/uploadsディレクトリを.gitignoreに追加しておき、画像がGithubにコミットされないようにする
 public/uploads/*
+
+config/secrets.yml
