@@ -63,8 +63,8 @@ $(function(){
         var insertHTML = '';
         messages.forEach(function (message) {
           insertHTML = buildHTML(message);
-          $('.chat-main__messages').append(insertHTML);
         })
+        $('.chat-main__messages').append(insertHTML);
         $('.chat-main__messages').animate({scrollTop: $('.chat-main__messages')[0].scrollHeight}, 'fast');
       })
       .fail(function () {
